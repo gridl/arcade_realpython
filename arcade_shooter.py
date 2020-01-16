@@ -35,6 +35,13 @@ class SpaceShooter(arcade.Window):
 
         arcade.schedule(self.add_enemy, 0.25)
         arcade.schedule(self.add_cloud, 1.0)
+        self.collision_sound = arcade.load_sound('sounds/Collision.wav')
+        self.move_up_sound = arcade.load_sound('sounds/Rising_putter.wav')
+        self.move_down_sound = arcade.load_sound('sounds/Falling_putter.wav')
+        self.background_music = arcade.load_sound('sounds/'
+                                                  'Apoxode_-_Electric_1.wav')
+        arcade.play_sound(self.background_music)
+
         self.paused = False
 
     def add_enemy(self, delta_time: float):
@@ -64,6 +71,7 @@ class SpaceShooter(arcade.Window):
             return
 
         if self.player.collides_with_list(self.enemies_list):
+            arcade.play_sound(self.collision_sound)
             arcade.close_window()
 
         self.all_sprites.update()
@@ -86,9 +94,11 @@ class SpaceShooter(arcade.Window):
 
         if symbol in (arcade.key.I, arcade.key.UP):
             self.player.change_y = 5
+            arcade.play_sound(self.move_up_sound)
 
         if symbol in (arcade.key.K, arcade.key.DOWN):
             self.player.change_y = -5
+            arcade.play_sound(self.move_down_sound)
 
         if symbol in (arcade.key.J, arcade.key.LEFT):
             self.player.change_x = -5
