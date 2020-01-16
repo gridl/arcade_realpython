@@ -63,6 +63,9 @@ class SpaceShooter(arcade.Window):
         if self.paused:
             return
 
+        if self.player.collides_with_list(self.enemies_list):
+            arcade.close_window()
+
         self.all_sprites.update()
 
         if self.player.top > self.height:
