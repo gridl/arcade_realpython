@@ -45,7 +45,14 @@ class SpaceShooter(arcade.Window):
         self.enemies_list.append(enemy)
         self.all_sprites.append(enemy)
 
-    def add_cloud(self, delta_time: float): ...
+    def add_cloud(self, delta_time: float):
+        cloud = FlyingSprite('images/cloud.png', SCALING)
+        cloud.left = random.randint(self.width, self.width + 80)
+        cloud.top = random.randint(10, self.height -10)
+        cloud.velocity = (random.randint(-5, -2), 0)
+
+        self.clouds_list.append(cloud)
+        self.all_sprites.append(cloud)
 
     def on_draw(self):
         arcade.start_render()
