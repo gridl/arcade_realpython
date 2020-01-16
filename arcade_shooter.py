@@ -61,6 +61,34 @@ class SpaceShooter(arcade.Window):
     def on_update(self, delta_time: float):
         self.all_sprites.update()
 
+    def on_key_press(self, symbol: int, modifiers: int):
+        if symbol == arcade.key.Q:
+            arcade.close_window()
+
+        if symbol == arcade.key.P:
+            self.paused = not self.paused
+
+        if symbol in (arcade.key.I, arcade.key.UP):
+            self.player.change_y = 5
+
+        if symbol in (arcade.key.K, arcade.key.DOWN):
+            self.player.change_y = -5
+
+        if symbol in (arcade.key.J, arcade.key.LEFT):
+            self.player.change_x = -5
+
+        if symbol in (arcade.key.L, arcade.key.RIGHT):
+            self.player.change_x = 5
+
+    def on_key_release(self, symbol: int, modifiers: int):
+        if symbol in (arcade.key.I, arcade.key.K,
+                      arcade.key.UP, arcade.key.DOWN):
+            self.player.change_y = 0
+
+        if symbol in (arcade.key.J, arcade.key.L,
+                      arcade.key.LEFT, arcade.key.RIGHT):
+            self.player.change_x = 0
+
 
 if __name__ == '__main__':
     app = SpaceShooter(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
