@@ -8,6 +8,14 @@ SCREEN_TITLE = 'Arcade Space Shooter'
 SCALING = 2.0
 
 
+class FlyingSprite(arcade.Sprite):
+    def update(self):
+        super().update()
+
+        if self.right < 0:
+            self.remove_from_sprite_lists()
+
+
 class SpaceShooter(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
@@ -29,7 +37,7 @@ class SpaceShooter(arcade.Window):
         arcade.schedule(self.add_cloud, 1.0)
 
     def add_enemy(self, delta_time: float):
-        enemy = arcade.Sprite('images/missile.png', SCALING)
+        enemy = FlyingSprite('images/missile.png', SCALING)
         enemy.left = random.randint(self.width, self.width + 80)
         enemy.top = random.randint(10, self.height - 10)
         enemy.velocity = (random.randint(-20, -5), 0)
