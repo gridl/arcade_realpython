@@ -35,6 +35,7 @@ class SpaceShooter(arcade.Window):
 
         arcade.schedule(self.add_enemy, 0.25)
         arcade.schedule(self.add_cloud, 1.0)
+        self.paused = False
 
     def add_enemy(self, delta_time: float):
         enemy = FlyingSprite('images/missile.png', SCALING)
@@ -59,7 +60,19 @@ class SpaceShooter(arcade.Window):
         self.all_sprites.draw()
 
     def on_update(self, delta_time: float):
+        if self.paused:
+            return
+
         self.all_sprites.update()
+
+        if self.player.top > self.height:
+            self.player.top = self.height
+        if self.player.right > self.width:
+            self.player.right = self.width
+        if self.player.bottom < 0:
+            self.player.bottom = 0
+        if self.player.left < 0:
+            self.player.left = 0
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.Q:
