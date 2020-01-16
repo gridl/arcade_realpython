@@ -15,7 +15,6 @@ class SpaceShooter(arcade.Window):
         self.enemies_list = arcade.SpriteList()
         self.clouds_list = arcade.SpriteList()
         self.all_sprites = arcade.SpriteList()
-        self.setup()
 
     def setup(self):
         arcade.set_background_color(arcade.color.SKY_BLUE)
@@ -44,7 +43,11 @@ class SpaceShooter(arcade.Window):
         arcade.start_render()
         self.all_sprites.draw()
 
+    def on_update(self, delta_time: float):
+        self.all_sprites.update()
+
 
 if __name__ == '__main__':
     app = SpaceShooter(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    app.setup()
     arcade.run()
