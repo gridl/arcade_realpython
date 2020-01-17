@@ -2,10 +2,9 @@ import random
 
 import arcade
 
-SCREEN_WIDTH = 1600
-SCREEN_HEIGHT = 900
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 600
 SCREEN_TITLE = 'Arcade Space Shooter'
-SCALING = 2.0
 
 
 class FlyingSprite(arcade.Sprite):
@@ -24,7 +23,7 @@ class SpaceShooter(arcade.Window):
     def setup(self):
         arcade.set_background_color(arcade.color.SKY_BLUE)
 
-        self.player = arcade.Sprite('images/jet.png', SCALING)
+        self.player = arcade.Sprite('images/jet.png')
         self.player.center_y = self.height / 2
         self.player.left = 10
 
@@ -48,7 +47,7 @@ class SpaceShooter(arcade.Window):
         self.paused = False
 
     def add_enemy(self, delta_time: float):
-        enemy = FlyingSprite('images/missile.png', SCALING)
+        enemy = FlyingSprite('images/missile.png')
         enemy.left = self.width
         enemy.top = random.randint(enemy.height, self.height)
         enemy.velocity = (random.randint(-250, -150), 0)
@@ -57,7 +56,7 @@ class SpaceShooter(arcade.Window):
         self.all_sprites.append(enemy)
 
     def add_cloud(self, delta_time: float):
-        cloud = FlyingSprite('images/cloud.png', SCALING)
+        cloud = FlyingSprite('images/cloud.png')
         cloud.left = self.width
         cloud.top = random.randint(cloud.height, self.height)
         cloud.velocity = (random.randint(-100, -20), 0)
