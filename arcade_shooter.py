@@ -2,8 +2,8 @@ import random
 
 import arcade
 
-SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 800
+SCREEN_WIDTH = 1600
+SCREEN_HEIGHT = 900
 SCREEN_TITLE = 'Arcade Space Shooter'
 SCALING = 2.0
 
@@ -48,7 +48,7 @@ class SpaceShooter(arcade.Window):
         enemy = FlyingSprite('images/missile.png', SCALING)
         enemy.left = random.randint(self.width, self.width + 80)
         enemy.top = random.randint(10, self.height - 10)
-        enemy.velocity = (random.randint(-20, -5), 0)
+        enemy.velocity = (random.randint(-250, -150), 0)
 
         self.enemies_list.append(enemy)
         self.all_sprites.append(enemy)
@@ -57,7 +57,7 @@ class SpaceShooter(arcade.Window):
         cloud = FlyingSprite('images/cloud.png', SCALING)
         cloud.left = random.randint(self.width, self.width + 80)
         cloud.top = random.randint(10, self.height -10)
-        cloud.velocity = (random.randint(-5, -2), 0)
+        cloud.velocity = (random.randint(-100, -20), 0)
 
         self.clouds_list.append(cloud)
         self.all_sprites.append(cloud)
@@ -74,7 +74,9 @@ class SpaceShooter(arcade.Window):
             arcade.play_sound(self.collision_sound)
             arcade.close_window()
 
-        self.all_sprites.update()
+        for s in self.all_sprites:
+            s.center_x = int(s.center_x + s.change_x * delta_time)
+            s.center_y = int(s.center_y + s.change_y * delta_time)
 
         if self.player.top > self.height:
             self.player.top = self.height
@@ -93,18 +95,18 @@ class SpaceShooter(arcade.Window):
             self.paused = not self.paused
 
         if symbol in (arcade.key.I, arcade.key.UP):
-            self.player.change_y = 5
+            self.player.change_y = 200
             arcade.play_sound(self.move_up_sound)
 
         if symbol in (arcade.key.K, arcade.key.DOWN):
-            self.player.change_y = -5
+            self.player.change_y = -300
             arcade.play_sound(self.move_down_sound)
 
         if symbol in (arcade.key.J, arcade.key.LEFT):
-            self.player.change_x = -5
+            self.player.change_x = -200
 
         if symbol in (arcade.key.L, arcade.key.RIGHT):
-            self.player.change_x = 5
+            self.player.change_x = 300
 
     def on_key_release(self, symbol: int, modifiers: int):
         if symbol in (arcade.key.I, arcade.key.K,
