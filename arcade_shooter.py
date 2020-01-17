@@ -35,11 +35,17 @@ class SpaceShooter(arcade.Window):
 
         arcade.schedule(self.add_enemy, 0.25)
         arcade.schedule(self.add_cloud, 1.0)
+
+        # Sound sources: Jon Fincher
         self.collision_sound = arcade.load_sound('sounds/Collision.wav')
         self.move_up_sound = arcade.load_sound('sounds/Rising_putter.wav')
         self.move_down_sound = arcade.load_sound('sounds/Falling_putter.wav')
+
+        # Sound source: http://ccmixter.org/files/Apoxode/59262
+        # License: https://creativecommons.org/licenses/by/3.0/
         self.background_music = arcade.load_sound('sounds/'
                                                   'Apoxode_-_Electric_1.wav')
+
         arcade.play_sound(self.background_music)
 
         self.paused = False
