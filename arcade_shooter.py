@@ -12,9 +12,6 @@ class FlyingSprite(arcade.Sprite):
     def update(self):
         super().update()
 
-        if self.right < 0:
-            self.remove_from_sprite_lists()
-
 
 class SpaceShooter(arcade.Window):
     def __init__(self, width, height, title):
@@ -83,6 +80,8 @@ class SpaceShooter(arcade.Window):
         for s in self.all_sprites:
             s.center_x = int(s.center_x + s.change_x * delta_time)
             s.center_y = int(s.center_y + s.change_y * delta_time)
+            if s.right < 0:
+                s.remove_from_sprite_lists()
 
         if self.player.top > self.height:
             self.player.top = self.height
