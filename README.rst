@@ -1,1 +1,1 @@
-https://realpython.com/arcade-python-game-framework/
+Working materials for the tutorial `Arcade: A Primer on the Python Game Framework <https://realpython.com/arcade-python-game-framework/>`__.
