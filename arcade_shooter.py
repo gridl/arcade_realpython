@@ -77,8 +77,8 @@ class SpaceShooter(arcade.Window):
             arcade.close_window()
 
         for s in self.all_sprites:
-            s.center_x = int(s.center_x + s.change_x * delta_time)
-            s.center_y = int(s.center_y + s.change_y * delta_time)
+            s.center_x += s.change_x * delta_time
+            s.center_y += s.change_y * delta_time
             if s.right < 0:
                 s.remove_from_sprite_lists()
 
